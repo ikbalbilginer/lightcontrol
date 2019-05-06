@@ -1,0 +1,38 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font: 18px Helvetica, Arial; }
+
+.light{
+    height:240px;
+    background-color: black;
+    color: white;
+    border-style: groove;
+    border-width: 1px;
+    border-color: white;
+    padding:80px 0;
+    text-align: center !important;  
+}
+
+.light:hover{
+    cursor:pointer;
+}
+
+.opened{
+    background-color: yellow !important;
+    color: black !important;
+    border-style: groove;
+    border-width: 1px;
+    border-color: black;
+}
+
+.light i{
+    font-size:26px;
+    margin-bottom: 13px;
+}
+
+.light span {
+    font-size:11px;
+}
+
+.light i, .light span{
+    display: block;
+}

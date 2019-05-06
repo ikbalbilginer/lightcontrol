@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+</head>
+<body>
+    
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <style>
+        
+    </style> 
+
+    <div id="container">
+        <div class="row">
+            <div id="1" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 1</span></div>
+            <div id="2" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 2</span></div>
+            <div id="3" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 3</span></div>
+            <div id="4" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 4</span></div>
+            <div id="5" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 5</span></div>
+            <div id="6" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 6</span></div>
+            <div id="7" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 7</span></div>
+            <div id="8" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 8</span></div>
+            <div id="9" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 9</span></div>
+            <div id="10" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 10</span></div>
+            <div id="11" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 11</span></div>
+            <div id="12" class="light"><i class="far fa-lightbulb"></i><span>LIGHTING 12</span></div>
+        </div>
+    </div>
+
+    <script>
+    $(function () {
+
+    var socket = io('http://localhost:3000');
+
+    $('.light').addClass('col-12 col-sm-4 col-md-3 col-lg-2');
+    
+    socket.on('output',function(res){
+        
+        res.forEach(element => {
+            var _id = element.light;
+
+            if(element.status=='opened'){
+                $('#'+_id).addClass('opened');
+            } else {$('#'+_id).removeClass('opened');}
+        });
+        return false;
+    });
+
+    $('.light').click(function(e){
+        
+        var _light = $(this).attr('id');
+        var _status = $(this).hasClass('opened') ? 'opened' : 'closed';
+        
+        socket.emit('click', {light: _light, status: _status });
+
+        //$(this).toggleClass('opened');
+    });
+  });
+
+    </script>
+</body>
+</html>
